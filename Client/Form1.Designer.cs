@@ -16,6 +16,7 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                
             }
             base.Dispose(disposing);
         }
@@ -30,14 +31,14 @@
         {
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.labelDebug = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(191, 459);
+            this.buttonLogin.Location = new System.Drawing.Point(255, 565);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.Size = new System.Drawing.Size(100, 28);
             this.buttonLogin.TabIndex = 0;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -45,28 +46,20 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(40, 459);
+            this.textBoxName.Location = new System.Drawing.Point(53, 565);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(100, 20);
+            this.textBoxName.Size = new System.Drawing.Size(132, 22);
             this.textBoxName.TabIndex = 1;
-            // 
-            // labelDebug
-            // 
-            this.labelDebug.AutoSize = true;
-            this.labelDebug.Location = new System.Drawing.Point(150, 119);
-            this.labelDebug.Name = "labelDebug";
-            this.labelDebug.Size = new System.Drawing.Size(35, 13);
-            this.labelDebug.TabIndex = 2;
-            this.labelDebug.Text = "label1";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 494);
-            this.Controls.Add(this.labelDebug);
+            this.ClientSize = new System.Drawing.Size(876, 608);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.buttonLogin);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -76,9 +69,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label labelDebug;
+        public System.Windows.Forms.Button buttonLogin;
+        public System.Windows.Forms.TextBox textBoxName;
     }
 }
 

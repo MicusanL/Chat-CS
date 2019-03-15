@@ -12,6 +12,7 @@ namespace Client
 {
     class MyClient
     {
+        public Form1 form;
         TcpClient client = null;
         NetworkStream stream = null;
         StreamReader streamReader = null;
@@ -21,7 +22,8 @@ namespace Client
 
         public MyClient()
         {
-            client = new TcpClient("localhost", 8000);
+            client = new TcpClient();
+            client.Connect("localhost", 8000);
             stream = client.GetStream();
             streamReader = new StreamReader(stream);
             streamWriter = new StreamWriter(stream);
@@ -39,20 +41,19 @@ namespace Client
             streamWriter.Flush();
         }
 
-        public Boolean sendName(String Name)
+        public void sendName(String Name)
         {
             streamWriter.WriteLine(Name);
             streamWriter.Flush();
             String response = receiveString();
-            
+            Boolean invalideName = true;
 
             if (response.Equals("**invalidename"))
             {
                 
-                Form1.chageLabelDebug("invalidename");
-             
+                Form1.debug("invalidename");
+               
                 
-                return false;
             }
             else
             {
@@ -62,12 +63,16 @@ namespace Client
                     clientsList.Add(client);
                 }
 
-                Form1.chageLabelDebug("Good name");
-           
-                return true;
+                Form1.debug("Good name");
+
+                invalideName = false;
+            }
+
+            if(invalideName == false)
+            {
+                setFormForChat();
             }
         }
-
         public void receiveInt()
         {
             int val = Convert.ToInt32(streamReader.ReadLine());
@@ -78,6 +83,12 @@ namespace Client
         {
             return streamReader.ReadLine();
 
+        }
+
+        private void setFormForChat()
+        {
+            form.textBoxName.Hide();
+            form.buttonLogin.Hide();
         }
     }
 }

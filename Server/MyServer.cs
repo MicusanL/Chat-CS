@@ -15,16 +15,7 @@ namespace Server
         NetworkStream stream = null;
         StreamReader streamReader = null;
         StreamWriter streamWriter = null;
-        static List<String> clientsList = new List<string>();
-
-        public MyServer(TcpClient clientSocket) // de mutat in alta clasa? pe constructorul clasei se porneste alt fir - receive - send 
-        {
-            stream = clientSocket.GetStream();
-            streamReader = new StreamReader(stream);
-            streamWriter = new StreamWriter(stream);
-            receiveName();
-           // stream.Close();
-        }
+        public static List<String> clientsList = new List<string>();
 
         public MyServer()
         {
@@ -37,11 +28,7 @@ namespace Server
             streamWriter.Flush();
         }
 
-        public void sendString(String message)
-        {
-            streamWriter.WriteLine(message);
-            streamWriter.Flush();
-        }
+      
 
         public void receiveInt()
         {
@@ -49,44 +36,20 @@ namespace Server
             Console.WriteLine(val);
         }
 
-        private String convertClientListToString()
+        public static String getStirngClientList()
         {
             String stringClientsList = "";
 
             foreach (string client in clientsList)
             {
                 stringClientsList += client;
+                stringClientsList += " ";
             }
 
             return stringClientsList;
         }
 
-        public void receiveName()
-        {
-            String name;
-            Boolean invalideName = true;
-
-            while (invalideName)
-            {
-                name = streamReader.ReadLine();
-                foreach (string client in clientsList)
-                {
-                    Console.WriteLine(clientsList);
-                }
-              
-                if (clientsList.Contains(name))
-                {
-                    sendString("**invalidename");
-
-                }
-                else
-                {
-                    clientsList.Add(name);
-                    sendString(convertClientListToString());
-                    invalideName = false;
-                }
-            }
-        }
+       
         void run()
         {
             server = new TcpListener(8000);
@@ -94,8 +57,9 @@ namespace Server
 
             while (true)
             {
+
                 TcpClient clientSocket = server.AcceptTcpClient();
-                new MyServer(clientSocket);
+                new ServerThread(clientSocket);
             }
         }
     }

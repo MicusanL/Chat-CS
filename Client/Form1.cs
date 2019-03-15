@@ -19,7 +19,7 @@ namespace Client
             InitializeComponent();
         }
 
-        public static void chageLabelDebug(String text)
+        public static void debug(String text)
         {
             MessageBox.Show(text);
         }
@@ -29,6 +29,8 @@ namespace Client
             String name = textBoxName.Text;
         
             client = new MyClient();
+            client.form = this;
+
             client.sendName(name);
         }
     }
