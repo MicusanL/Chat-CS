@@ -33,5 +33,10 @@ namespace Client
 
             client.sendName(name);
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            client.logout();
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace Server
                 stringClientsList += " ";
             }
 
-            return stringClientsList;
+            return stringClientsList.Trim();
         }
 
        

@@ -19,7 +19,7 @@ namespace Client
         StreamWriter streamWriter = null;
      
         List<String> clientsList = new List<string>();
-
+        
         public MyClient()
         {
             client = new TcpClient();
@@ -32,6 +32,9 @@ namespace Client
 
         public void logout()
         {
+            streamWriter.WriteLine("**Logout");
+            streamWriter.Flush();
+            Thread.Sleep(1000);
             stream.Close();
             client.Close();
         }
@@ -51,19 +54,16 @@ namespace Client
             if (response.Equals("**invalidename"))
             {
                 
-                Form1.debug("invalidename");
-               
+                //Form1.debug("invalidename");
+                form.labelInvalideName.Show();
                 
             }
             else
             {
-                string[] clients = response.Split(' ');
-                foreach (string client in clients)
-                {
-                    clientsList.Add(client);
-                }
+                updateClientsList(response);
+               
 
-                Form1.debug("Good name");
+                //Form1.debug("Good name");
 
                 invalideName = false;
             }
@@ -89,6 +89,24 @@ namespace Client
         {
             form.textBoxName.Hide();
             form.buttonLogin.Hide();
+            form.labelInvalideName.Hide();
+            form.checkedListBoxClients.Show();
+            form.richTextBoxMessages.Show();
+            form.buttonSendMessage.Show();
+        }
+
+        private void updateClientsList(String stringClientsList)
+        {
+            string[] clients = stringClientsList.Split(' ');
+            clientsList.Clear();
+
+            form.checkedListBoxClients.Items.Clear();
+
+            foreach (string client in clients)
+            {
+                clientsList.Add(client);
+                form.checkedListBoxClients.Items.Add(client);
+            }
         }
     }
 }

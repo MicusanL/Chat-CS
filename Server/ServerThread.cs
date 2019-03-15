@@ -15,6 +15,7 @@ namespace Server
         NetworkStream stream = null;
         StreamReader streamReader = null;
         StreamWriter streamWriter = null;
+        TcpClient tcpClient;
 
         public ServerThread(TcpClient clientSocket) // de mutat in alta clasa? pe constructorul clasei se porneste alt fir - receive - send 
         {
@@ -24,7 +25,7 @@ namespace Server
             stream = clientSocket.GetStream();
             streamReader = new StreamReader(stream);
             streamWriter = new StreamWriter(stream);
-           
+            tcpClient = clientSocket;
         }
 
         void run()
@@ -34,8 +35,12 @@ namespace Server
 
             while (true)
             {
-
-               
+                String message = streamReader.ReadLine();
+                if (message.Equals("**Logout"))
+                {
+                    //tcpClient.Close();
+                    return;
+                }
             }
         }
 
@@ -44,9 +49,10 @@ namespace Server
             String name;
             Boolean invalideName = true;
 
-            while (invalideName)
+            while (invalideName == true)
             {
-                name = streamReader.ReadLine();
+                
+                    name = streamReader.ReadLine();
 
                 if (MyServer.clientsList.Contains(name))
                 {
