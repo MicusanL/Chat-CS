@@ -72,6 +72,7 @@ namespace Client
             {
                 setFormForChat();
             }
+
         }
         public void receiveInt()
         {
